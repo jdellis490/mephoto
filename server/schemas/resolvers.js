@@ -1,6 +1,5 @@
-const { AuthenticationError, UserInputError } = require('apollo-server-express');
+const { AuthenticationError } = require('apollo-server-express');
 const { User, ImageCard } = require('../models');
-const { findOneAndUpdate } = require('../models/User');
 const { signToken } = require('../utils/auth');
 
 const resolvers = {
