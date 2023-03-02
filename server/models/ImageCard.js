@@ -3,7 +3,7 @@ const dateFormat = require('../utils/dateFormat');
 
 const imageCardSchema = new Schema({
     image: {
-        type: Image,
+        type: String,
     },
     title: {
         type: String,

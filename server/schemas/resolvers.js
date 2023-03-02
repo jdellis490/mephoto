@@ -15,7 +15,7 @@ const resolvers = {
             return ImageCard.find(params).sort({ createdAt: -1 });
         },
         imageCard: async (parent, { imageId }) => {
-            return Thought.findOne({ _id: imageId });
+            return ImageCard.findOne({ _id: imageId });
         },
     },
 
