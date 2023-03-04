@@ -19,10 +19,10 @@ const userSchema = new Schema({
         required: true,
         minlength: 5,
     },
-    comments: [
+    imageCards: [
         {
             type: Schema.Types.ObjectId,
-            ref: 'Comment',
+            ref: 'ImageCard',
         },
     ],
 });

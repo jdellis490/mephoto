@@ -4,6 +4,7 @@ const dateFormat = require('../utils/dateFormat');
 const imageCardSchema = new Schema({
     image: {
         type: String,
+        required: true,
     },
     title: {
         type: String,
