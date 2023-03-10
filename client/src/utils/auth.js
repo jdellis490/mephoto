@@ -35,7 +35,7 @@ class AuthService {
     logout() {
         // Removes token and loads page with unauth access
         localStorage.removeItem('id_token');
-        window.location.reload();
+        window.location.assign('/');
     }
 }
 
