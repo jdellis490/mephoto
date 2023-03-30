@@ -35,10 +35,10 @@ const Signup = () => {
 
   return (
     <div className="antialiased text-gray-900 px-6">
-      <div className="max-w-xl mx-auto py-12 md:max-w-4x1">
+      <div className="max-w-xl mx-auto py-12 md:max-w-4x1 ">
         <div className="py-12">
           <h2 className="text-2xl font-bold">Sign Up</h2>
-          <div className="mt-8 max-w-md">
+          <div className="mt-8 px-5 py-5 pb-10 max-w-md border border-neutral-800 rounded-xl">
             <div className="grid grid-cols-1 gap-6">
               <label className="block">
                 <span className="text-gray-800">Username:</span>
@@ -66,13 +66,9 @@ const Signup = () => {
             </div>
           </div>
         </div>
-        <p className="inline block text-sm font-bold px-4 py-2 border rounded border-lime-500 hover:bg-lime-500 hover:text-white">
+        <p className="inline block mr-3 text-md font-bold px-5 py-3 border rounded border-lime-500 hover:bg-lime-500 hover:text-white">
           Sign Up
         </p>
-        {' '}or{' '}
-        <Link to="/login"><p className="inline block text-sm font-bold px-4 py-2 border rounded border-neutral-500 hover:bg-neutral-500 hover:text-white">
-          Login
-        </p></Link>
       </div>
     </div>
   );
