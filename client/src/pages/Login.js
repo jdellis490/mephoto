@@ -35,16 +35,40 @@ const Login = (props) => {
     };
 
     return (
-        <div>
-            <Link to='/signup'> Click to Signup</Link>
-
-            <h2>Login</h2>
-            <form onSubmit={handleFormSubmit}>
-                <div>
-                    <label htmlFor='email'>Email:</label>
-                    <input placeholder='Enter email address' name='email' type='email' id='email' onChange={handleChange} />
-                </div>
-            </form>
+    <div className="antialiased text-gray-900 px-6">
+      <div className="max-w-xl mx-auto py-12 md:max-w-4x1">
+        <div className="py-12">
+          <h2 className="text-2xl font-bold">Log In</h2>
+          <div className="mt-8 max-w-md">
+            <div className="grid grid-cols-1 gap-6">
+              <label className="block">
+                <span className="text-gray-800">Username:</span>
+                <input
+                  type="text"
+                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-lime-300 focus:ring-opacity-50"
+                ></input>
+              </label>
+              <label className="block">
+                <span className="text-gray-800">Password:</span>
+                <input
+                  type="password"
+                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-lime-300 focus:ring-opacity-50"
+                  placeholder="password"
+                ></input>
+              </label>
+            </div>
+          </div>
         </div>
+        <p className="inline block text-sm font-bold px-4 py-2 border rounded border-lime-500 hover:bg-lime-500 hover:text-white">
+          Login
+        </p>
+        {' '}or{' '}
+        <Link to="/signup"><p className="inline block text-sm font-bold px-4 py-2 border rounded border-neutral-500 hover:bg-neutral-500 hover:text-white">
+          Sign Up
+        </p></Link>
+      </div>
+    </div>        
     )
-}
+};
+
+export default Login

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useMutation } from "@apollo/client";
 import { ADD_USER } from "../utils/mutations";
 import Auth from "../utils/auth";
@@ -69,6 +69,10 @@ const Signup = () => {
         <p className="inline block text-sm font-bold px-4 py-2 border rounded border-lime-500 hover:bg-lime-500 hover:text-white">
           Sign Up
         </p>
+        {' '}or{' '}
+        <Link to="/login"><p className="inline block text-sm font-bold px-4 py-2 border rounded border-neutral-500 hover:bg-neutral-500 hover:text-white">
+          Login
+        </p></Link>
       </div>
     </div>
   );
