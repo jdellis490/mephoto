@@ -1,4 +1,6 @@
 import React from "react";
+import { Link } from "react-router-dom";
+
 
 const Home = () => {
   return (
@@ -10,6 +12,7 @@ const Home = () => {
         </p>
         <p className="text-gray-500 text-lg">Let's get started!</p>
       </div>
+      <div className="container mx-auto bg-green-300"><Link to="/upload"><p>UPLOAD AN IMAGE</p></Link></div>
       <div className="max-w-sm bg-gray-200 rounded shadow-lg p-8 m-10">
         <div className="font-bold text-green-700 text-xl mb-3">
           Image title by Author

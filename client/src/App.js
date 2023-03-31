@@ -13,6 +13,7 @@ import Signup from "./pages/Signup";
 import Login from "./pages/Login";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+import UploadForm from "./components/UploadForm";
 
 //Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({ uri: "graphql" });
@@ -45,6 +46,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/upload" element={<UploadForm />} />
         </Routes>
         <Footer />
       </BrowserRouter>
