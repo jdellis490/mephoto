@@ -1,26 +1,23 @@
-const { Schema, model } = require('mongoose');
+const mongoose = require('mongoose');
+const { Schema } = mongoose;
 const dateFormat = require('../utils/dateFormat');
 
 const imageCardSchema = new Schema({
     image: {
         type: String,
-        required: true,
     },
     title: {
         type: String,
-        required: true,
         trim: true,
         maxlength: 25,
     },
     description: {
         type: String,
-        required: true,
         trim: true,
-        maxlength: 280,
+        maxlength: 300,
     },
     imageAuthor: {
         type: String,
-        required: true,
         trim: true,
     },
     createdAt: {
@@ -49,6 +46,6 @@ const imageCardSchema = new Schema({
       ],
 });
 
-const ImageCard = model('ImageCard', imageCardSchema);
+const ImageCard = mongoose.model('ImageCard', imageCardSchema);
 
 module.exports = ImageCard;

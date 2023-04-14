@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 import { QUERY_SINGLE_IMAGECARD } from "../utils/queries";
 
-const SingleImageCard = () => {
+const SingleImageCard = ( ) => {
   // Use `useParams()` to get value of route parameter `:imageId`
   const { imageId } = useParams();
   const { loading, data } = useQuery(QUERY_SINGLE_IMAGECARD, {

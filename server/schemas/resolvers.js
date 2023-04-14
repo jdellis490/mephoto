@@ -12,10 +12,10 @@ const resolvers = {
         },
         imageCards: async (parent, { username }) => {
             const params = username ? { username } : {};
-            return ImageCard.find(params).sort({ createdAt: -1 });
+            return await ImageCard.find(params).sort({ createdAt: -1 });
         },
         imageCard: async (parent, { imageId }) => {
-            return ImageCard.findOne({ _id: imageId });
+            return await ImageCard.findOne({ _id: imageId });
         },
     },
 
@@ -40,13 +40,13 @@ const resolvers = {
             return { token, user };
         },
         addImageCard: async (parent, { image, title, description, imageAuthor }) => {
-            const card = await ImageCard.create({ image, title, description, imageAuthor });
+            const imageCard = await ImageCard.create({ image, title, description, imageAuthor });
 
             await User.findOneAndUpdate(
                 { username: imageAuthor },
-                { $addToSet: { imageCards: card._id } }
+                { $addToSet: { imageCards: imageCard._id } }
             );
-            return photo;
+            return imageCard;
         },
         addComment: async (parent, { imageId, commentText, commentAuthor }) => {
             return ImageCard.findByIdAndUpdate(

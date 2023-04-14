@@ -16,7 +16,7 @@ import Footer from "./components/Footer";
 import UploadForm from "./components/UploadForm";
 
 //Construct our main GraphQL API endpoint
-const httpLink = createHttpLink({ uri: "graphql" });
+const httpLink = createHttpLink({ uri: "/graphql" });
 
 //Requests middleware that attaches JWT token to every request as an `authorization` header
 const authLink = setContext((_, { headers }) => {

@@ -1,5 +1,7 @@
-const { Schema, model } = require('mongoose');
+const mongoose = require('mongoose');
+const { Schema } = mongoose;
 const bcrypt = require('bcrypt');
+const ImageCard = require('./ImageCard');
 
 const userSchema = new Schema({
     username: {
@@ -19,18 +21,13 @@ const userSchema = new Schema({
         required: true,
         minlength: 5,
     },
-    imageCards: [
-        {
-            type: Schema.Types.ObjectId,
-            ref: 'ImageCard',
-        },
-    ],
+    imageCards: [ImageCard.schema]
 });
 
 userSchema.pre('save', async function (next) {
     if (this.isNew || this.isModified('password')) {
-      const saltRounds = 10;
-      this.password = await bcrypt.hash(this.password, saltRounds);
+      const saveRounds = 10;
+      this.password = await bcrypt.hash(this.password, saveRounds);
     }
   
     next();
@@ -40,6 +37,6 @@ userSchema.pre('save', async function (next) {
     return bcrypt.compare(password, this.password);
   };
   
-  const User = model('User', userSchema);
+  const User = mongoose.model('User', userSchema);
   
   module.exports = User;
