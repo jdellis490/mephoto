@@ -2,9 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import ImageCard from "../components/ImageCard";
 
-
 const Home = () => {
-
   return (
     <div>
       {" "}
@@ -20,7 +18,7 @@ const Home = () => {
         </Link>
       </div>
       {/* Hope this works! */}
-        <ImageCard />
+      <ImageCard />
       <div className="max-w-sm bg-gray-200 rounded shadow-lg p-8 m-10">
         <div className="font-bold text-green-700 text-xl mb-3">
           Image title by Author
