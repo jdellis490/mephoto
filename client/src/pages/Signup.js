@@ -37,7 +37,7 @@ const Signup = () => {
     <div className="antialiased text-gray-900 px-6">
       <div className="max-w-xl mx-auto py-12 md:max-w-4x1 ">
         <div className="py-12">
-          <h2 className="text-2xl font-bold">Sign Up</h2>
+          <h2 className="text-2xl font-bold">Signup</h2>
           <div className="mt-8 px-5 py-5 pb-10 max-w-md border border-neutral-800 rounded-xl">
             <div className="grid grid-cols-1 gap-6">
               <label className="block">
@@ -67,7 +67,7 @@ const Signup = () => {
           </div>
         </div>
         <p className="inline block mr-3 text-md font-bold px-5 py-3 border rounded border-lime-500 hover:bg-lime-500 hover:text-white">
-          Sign Up
+          Signup
         </p>
       </div>
     </div>
