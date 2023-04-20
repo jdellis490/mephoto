@@ -20,11 +20,11 @@ const Home = () => {
         )}
         <p className="text-gray-500 text-lg">Let's get started!</p>
         <br />
-        <div className="inline-block mt-5 text-lg text-center px-4 py-2 leading-relaxed border-2 rounded border-neutral-800 border-dashed bg-lime-400 text-neutral-800 hover:bg-neutral-800 hover:text-lime-400 md:mt-0">
+        <button className="inline-block mt-5 text-lg text-center px-4 py-2 leading-relaxed border-2 rounded border-neutral-800 border-dashed bg-lime-400 text-neutral-800 hover:bg-neutral-800 hover:text-lime-400 md:mt-0">
         <Link to="/upload">
           <p >UPLOAD AN IMAGE <SlCamera className="mx-auto" size={'50'}/></p>
         </Link>
-      </div>
+      </button>
       </div>
     
       {/* Hope this works! */}
