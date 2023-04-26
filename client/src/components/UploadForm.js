@@ -4,13 +4,25 @@ import { ADD_IMAGECARD } from "../utils/mutations";
 import { QUERY_IMAGECARDS } from "../utils/queries";
 import { Link } from "react-router-dom";
 import Auth from "../utils/auth";
+import Axios from "axios";
 
 const UploadForm = () => {
+  const [formState, setFormState] = useState({
+    title: "",
+    description: "",
+  });
   const [image, setImage] = useState("");
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  const [imageData, setImageData] = useState();
 
   const [addImageCard, { error }] = useMutation(ADD_IMAGECARD, {
+    variables: {
+      image,
+      title,
+      description,
+      imageAuthor: Auth.getProfile().data.username,
+    },
     update(cache, { data: { addImageCard } }) {
       try {
         const { imageCards } = cache.readQuery({ query: QUERY_IMAGECARDS });
@@ -24,9 +36,26 @@ const UploadForm = () => {
       }
     },
   });
+  
+  const handleFileChange = ({ target }) => {
+    setImageData(target.files[0]);
+    console.log(target.files[0]);
+    setImage(target.value);
+  };
+
 
   const formSubmit = async (event) => {
     event.preventDefault();
+    
+    const formData = new FormData();
+    formData.append("file", imageData);
+    formData.append("upload_preset", process.env.REACT_APP_UPLOAD_PRESET);
+      
+    await Axios.post(`https://api.cloudinary.com/v1_1/${process.env.REACT_APP_CLOUD_NAME}/image/upload`, formData)
+    .then((res) => {
+      console.log(res);
+      // setImage(res.data.url);
+      });
 
     try {
       const { data } = await addImageCard({
@@ -47,43 +76,48 @@ const UploadForm = () => {
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-    if (name === "title") {
-      setImage(value);
-      setTitle(value);
-      setDescription(value);
-    }
-  };
 
+    setFormState({
+      ...formState,
+      [name]: value,
+    });
+  };
+  
   return (
     <div>
       <div className="antialiased text-gray-900 px-6">
         <div className="max-w-xl mx-auto py-12 md:max-w-4x1">
           <div className="py-12">
-            <h2 className="text-3xl font-bold">Upload an Image</h2>
+            <h2 className="text-3xl font-bold">Upload an Image!</h2>
             {Auth.loggedIn() ? (
-              <form className="mt-8 px-5 py-5 pb-10 max-w-md border border-neutral-800 rounded-xl">
+              <form className="mt-8 px-5 py-5 pb-10 max-w-md border border-neutral-800 rounded-xl"
+                    onSubmit={formSubmit}>
                 <div className="grid grid-cols-1 gap-6">
                   <label className="block">
-                    <span className="text-gray-800">Choose and image</span>
-                    <input type="file" className="mt-1 block w-full"></input>
+                    <span className="text-gray-800">Choose an image</span>
+                    <input type="file" className="mt-1 block w-full" onChange={handleFileChange}
+                            name="file" accept="image/*"
+                            value={image}></input>
                   </label>
                   <label className="block">
                     <span className="text-gray-800">Title:</span>
                     <input
                       type="text"
-                      className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-lime-300 focus:ring-opacity-50"
+                      className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-lime-400 focus:ring-lime-300 focus:ring focus:ring-opacity-50"
+                      onChange={handleChange}
                     ></input>
                   </label>
                   <label className="block">
                     <span className="text-gray-800">Description:</span>
                     <textarea
-                      className="form-textarea mt-1 block w-full h-24 rounded-md border-gray-300 shadow-sm focus:border-lime-300 focus:ring-opacity-50"
+                      className="form-textarea mt-1 block w-full h-24 rounded-md border-gray-300 shadow-sm focus:border-lime-400 focus:ring-lime-300 focus:ring focus:ring-opacity-50"
                       rows="3"
                       placeholder="Enter your description"
+                      onChange={handleChange}
                     ></textarea>
                   </label>
                   <button className="inline block text-md font-bold px-5 py-3 border rounded border-lime-500 hover:bg-lime-500 hover:text-white">
-                    Upload!
+                    Upload
                   </button>
                 </div>
               </form>
