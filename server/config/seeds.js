@@ -73,6 +73,20 @@ await User.create({
     ]
 });
 
+await User.create({
+    username: 'Tester',
+    email: 'test@email.com',
+    password: 'password1',
+    imageCards: [ 
+        // { 
+        //     image: 'stormtroopers.jpeg',
+        //     title: 'Stormtroopers',
+        //     description: 'Soldiers clad in all white means trouble.',
+        //     imageAuthor: 'JediMaster1'
+        // }
+    ]
+});
+
 console.log('Users seeded!');
 
 // for (let i = 0; i < ImageCard.length; i++) {
