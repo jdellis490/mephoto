@@ -3,7 +3,7 @@ const { Schema } = mongoose;
 const dateFormat = require('../utils/dateFormat');
 
 const imageCardSchema = new Schema({
-    image: {
+    imageUrl: {
         type: String,
     },
     title: {

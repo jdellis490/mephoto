@@ -8,7 +8,7 @@ export const QUERY_USER = gql`
             email
             imageCards {
                 _id
-                image
+                imageUrl
                 title
                 description
                 createdAt
@@ -21,7 +21,7 @@ export const QUERY_IMAGECARDS = gql`
     query getImageCards {
         imageCards {
             _id
-            image
+            imageUrl
             title
             description
             imageAuthor
@@ -34,7 +34,7 @@ export const QUERY_SINGLE_IMAGECARD = gql`
     query getSingleImageCard($imageId: ID!) {
         imageCard(imageId: $imageId) {
             _id
-            image
+            imageUrl
             title
             description
             imageAuthor

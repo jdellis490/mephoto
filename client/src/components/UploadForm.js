@@ -6,23 +6,20 @@ import { Link } from "react-router-dom";
 import Auth from "../utils/auth";
 import Axios from "axios";
 
+
+// cloudinary.config({
+//   cloud_name: process.env.REACT_APP_CLOUD_NAME,
+//   api_key: process.env.REACT_APP_CLOUD_API_KEY,
+//   api_secret: process.env.REACT_APP_CLOUD_API_SECRET
+// });
+
 const UploadForm = () => {
-  const [formState, setFormState] = useState({
-    title: "",
-    description: "",
-  });
   const [image, setImage] = useState("");
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [imageData, setImageData] = useState();
 
-  const [addImageCard, { error }] = useMutation(ADD_IMAGECARD, {
-    variables: {
-      image,
-      title,
-      description,
-      imageAuthor: Auth.getProfile().data.username,
-    },
+  const [addImageCard] = useMutation(ADD_IMAGECARD, {
     update(cache, { data: { addImageCard } }) {
       try {
         const { imageCards } = cache.readQuery({ query: QUERY_IMAGECARDS });
@@ -43,10 +40,8 @@ const UploadForm = () => {
     setImage(target.value);
   };
 
-
   const formSubmit = async (event) => {
     event.preventDefault();
-    
     const formData = new FormData();
     formData.append("file", imageData);
     formData.append("upload_preset", process.env.REACT_APP_UPLOAD_PRESET);
@@ -54,33 +49,19 @@ const UploadForm = () => {
     await Axios.post(`https://api.cloudinary.com/v1_1/${process.env.REACT_APP_CLOUD_NAME}/image/upload`, formData)
     .then((res) => {
       console.log(res);
-      // setImage(res.data.url);
+      })
+      .then((res) => {
+        addImageCard({
+          variables: { 
+            imageUrl: res.data.secure_url,
+            title,
+            description,
+            imageAuthor: Auth.getProfile().data.username
+          }
+        });
+        setTitle("");
+        setDescription("");
       });
-
-    try {
-      const { data } = await addImageCard({
-        variables: {
-          image,
-          title,
-          description,
-          imageAuthor: Auth.getProfile().data.username,
-        },
-      });
-      setImage("");
-      setTitle("");
-      setDescription("");
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-
-    setFormState({
-      ...formState,
-      [name]: value,
-    });
   };
   
   return (
@@ -104,7 +85,7 @@ const UploadForm = () => {
                     <input
                       type="text"
                       className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-lime-400 focus:ring-lime-300 focus:ring focus:ring-opacity-50"
-                      onChange={handleChange}
+                      onChange={(event) => setTitle(event.target.value)}
                     ></input>
                   </label>
                   <label className="block">
@@ -113,7 +94,7 @@ const UploadForm = () => {
                       className="form-textarea mt-1 block w-full h-24 rounded-md border-gray-300 shadow-sm focus:border-lime-400 focus:ring-lime-300 focus:ring focus:ring-opacity-50"
                       rows="3"
                       placeholder="Enter your description"
-                      onChange={handleChange}
+                      onChange={(event) => setDescription(event.target.value)}
                     ></textarea>
                   </label>
                   <button className="inline block text-md font-bold px-5 py-3 border rounded border-lime-500 hover:bg-lime-500 hover:text-white">

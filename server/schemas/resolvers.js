@@ -39,9 +39,8 @@ const resolvers = {
             const token = signToken(user);
             return { token, user };
         },
-        addImageCard: async (parent, { image, title, description, imageAuthor }) => {
-            const imageCard = await ImageCard.create({ image, title, description, imageAuthor });
-
+        addImageCard: async (parent, { imageUrl, title, description, imageAuthor }) => {
+            const imageCard = await ImageCard.create({ imageUrl, title, description, imageAuthor });
             await User.findOneAndUpdate(
                 { username: imageAuthor },
                 { $addToSet: { imageCards: imageCard._id } }

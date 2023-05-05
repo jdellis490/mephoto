@@ -11,7 +11,6 @@ const ImageCard = () => {
   if (loading) {
     return <h3>Loading...</h3>;
   }
-  // console.log(`data:${data}`)
 
   return (
     <div className="container mx-auto">
@@ -19,13 +18,13 @@ const ImageCard = () => {
         {data.imageCards.map((imageCards) => (
           <div
             key={imageCards._id}
-            className="bg-gray-200 flex-1 rounded shadow-lg p-3 m-4 font-bold text-green-700 text-2xl text-center"
+            className="bg-gray-200 flex-wrap flex-1 rounded shadow-lg p-3 m-4 font-bold text-green-700 text-2xl text-center"
           >
             <div className="m-5">
               {imageCards.title} <br />
               by: <span className="text-lime-500">{imageCards.imageAuthor}</span>
             </div>
-            <img className="w-full mb-3 rounded-lg" src={imageCards.image} alt="" />
+            <img className="w-full mb-3 rounded-lg" src={imageCards.imageUrl} alt="" />
             <p className="text-neutral-800 pb-5 text-xs text-left">
                 Date Added: {imageCards.createdAt}{" "}
               </p>

@@ -25,10 +25,10 @@ export const ADD_USER = gql`
 `;
 
 export const ADD_IMAGECARD = gql`
-    mutation addImageCard($image: String!, $title: String!, $description: String!, $imageAuthor: String!) {
-        addImageCard(image: $image, title: $title, description: $description, imageAuthor: $imageAuthor) {
+    mutation addImageCard($imageUrl: String!, $title: String!, $description: String!, $imageAuthor: String!) {
+        addImageCard(imageUrl: $imageUrl, title: $title, description: $description, imageAuthor: $imageAuthor) {
             _id
-            image
+            imageUrl
             title
             description
             imageAuthor
@@ -45,7 +45,7 @@ export const ADD_COMMENT = gql`
     mutation addComment($imageId: ID!, $commentText: String!, $commentAuthor: String!) {
         addComment(imageId: $imageId, commentText: $commentText, commentAuthor: $commentAuthor) {
             _id
-            image
+            imageUrl
             title
             description
             imageAuthor

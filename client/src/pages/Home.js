@@ -29,6 +29,8 @@ const Home = () => {
     
       {/* Hope this works! */}
       <ImageCard />
+      
+      {/* Finished Image card example */}
       <div className="max-w-sm bg-gray-200 rounded shadow-lg p-8 m-10">
         <div className="font-bold text-green-700 text-xl mb-3">
           Image title by Author
