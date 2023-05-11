@@ -14,11 +14,11 @@ const ImageCard = () => {
 
   return (
     <div className="container mx-auto">
-      <div className="md:flex">
+      <div className="flex flex-wrap">
         {data.imageCards.map((imageCards) => (
           <div
             key={imageCards._id}
-            className="bg-gray-200 flex-wrap flex-1 rounded shadow-lg p-3 m-4 font-bold text-green-700 text-2xl text-center"
+            className="bg-gray-200 basis-1/4 rounded shadow-lg p-3 m-2 font-bold text-green-700 text-2xl text-center"
           >
             <div className="m-5">
               {imageCards.title} <br />

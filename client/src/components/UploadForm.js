@@ -6,7 +6,6 @@ import { Link } from "react-router-dom";
 import Auth from "../utils/auth";
 import Axios from "axios";
 
-
 // cloudinary.config({
 //   cloud_name: process.env.REACT_APP_CLOUD_NAME,
 //   api_key: process.env.REACT_APP_CLOUD_API_KEY,
@@ -19,21 +18,21 @@ const UploadForm = () => {
   const [description, setDescription] = useState("");
   const [imageData, setImageData] = useState();
 
-  const [addImageCard] = useMutation(ADD_IMAGECARD, {
+  const [addImageCard, { error }] = useMutation(ADD_IMAGECARD, {
     update(cache, { data: { addImageCard } }) {
       try {
-        const { imageCards } = cache.readQuery({ query: QUERY_IMAGECARDS });
+        const imageCards = cache.readQuery({ query: QUERY_IMAGECARDS });
 
         cache.writeQuery({
           query: QUERY_IMAGECARDS,
-          data: { imageCards: [addImageCard, ...imageCards] },
+          data: { imageCards: [addImageCard, imageCards] },
         });
       } catch (error) {
         console.log(error);
       }
     },
   });
-  
+
   const handleFileChange = ({ target }) => {
     setImageData(target.files[0]);
     console.log(target.files[0]);
@@ -45,25 +44,30 @@ const UploadForm = () => {
     const formData = new FormData();
     formData.append("file", imageData);
     formData.append("upload_preset", process.env.REACT_APP_UPLOAD_PRESET);
-      
-    await Axios.post(`https://api.cloudinary.com/v1_1/${process.env.REACT_APP_CLOUD_NAME}/image/upload`, formData)
-    .then((res) => {
-      console.log(res);
-      })
-      .then((res) => {
-        addImageCard({
-          variables: { 
-            imageUrl: res.data.secure_url,
+
+    await Axios.post(
+      `https://api.cloudinary.com/v1_1/${process.env.REACT_APP_CLOUD_NAME}/image/upload`,
+      formData
+    ).then((res) => {
+      console.log(res.data.secure_url);
+      const imageUrl = res.data.secure_url;
+      try {
+         addImageCard({
+          variables: {
+            imageUrl: imageUrl,
             title,
             description,
-            imageAuthor: Auth.getProfile().data.username
-          }
+            imageAuthor: Auth.getProfile().data.username,
+          },
         });
         setTitle("");
         setDescription("");
-      });
+      } catch (error) {
+        console.error(error);
+      }
+    });
   };
-  
+
   return (
     <div>
       <div className="antialiased text-gray-900 px-6">
@@ -71,14 +75,21 @@ const UploadForm = () => {
           <div className="py-12">
             <h2 className="text-3xl font-bold">Upload an Image!</h2>
             {Auth.loggedIn() ? (
-              <form className="mt-8 px-5 py-5 pb-10 max-w-md border border-neutral-800 rounded-xl"
-                    onSubmit={formSubmit}>
+              <form
+                className="mt-8 px-5 py-5 pb-10 max-w-md border border-neutral-800 rounded-xl"
+                onSubmit={formSubmit}
+              >
                 <div className="grid grid-cols-1 gap-6">
                   <label className="block">
                     <span className="text-gray-800">Choose an image</span>
-                    <input type="file" className="mt-1 block w-full" onChange={handleFileChange}
-                            name="file" accept="image/*"
-                            value={image}></input>
+                    <input
+                      type="file"
+                      className="mt-1 block w-full"
+                      onChange={handleFileChange}
+                      name="file"
+                      accept="image/*"
+                      value={image}
+                    ></input>
                   </label>
                   <label className="block">
                     <span className="text-gray-800">Title:</span>
@@ -97,10 +108,18 @@ const UploadForm = () => {
                       onChange={(event) => setDescription(event.target.value)}
                     ></textarea>
                   </label>
-                  <button className="inline block text-md font-bold px-5 py-3 border rounded border-lime-500 hover:bg-lime-500 hover:text-white">
+                  <button
+                    className="inline block text-md font-bold px-5 py-3 border rounded border-lime-500 hover:bg-lime-500 hover:text-white"
+                    type="submit"
+                  >
                     Upload
                   </button>
                 </div>
+                {error && (
+                  <div className="text-red-500 italic bg-red-100 rounded p-1">
+                    {error.message}
+                  </div>
+                )}
               </form>
             ) : (
               <div className="container mt-5 p-5 bg-gray-200 rounded-xl shadow border text-xl">
