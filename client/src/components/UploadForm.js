@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useMutation } from "@apollo/client";
 import { ADD_IMAGECARD } from "../utils/mutations";
 import { QUERY_IMAGECARDS } from "../utils/queries";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Auth from "../utils/auth";
 import Axios from "axios";
 
@@ -14,21 +14,21 @@ import Axios from "axios";
 
 const UploadForm = () => {
   const [image, setImage] = useState("");
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [imageData, setImageData] = useState();
+  const [imageData, setImageData] = useState("");
+  const [formState, setFormState] = useState({
+    title: "", description: ""
+  });
 
   const [addImageCard, { error }] = useMutation(ADD_IMAGECARD, {
     update(cache, { data: { addImageCard } }) {
       try {
         const imageCards = cache.readQuery({ query: QUERY_IMAGECARDS });
-
-        cache.writeQuery({
+        cache.modify({
           query: QUERY_IMAGECARDS,
           data: { imageCards: [addImageCard, imageCards] },
         });
       } catch (error) {
-        console.log(error);
+        console.error(error);
       }
     },
   });
@@ -39,8 +39,21 @@ const UploadForm = () => {
     setImage(target.value);
   };
 
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormState({
+      ...formState,
+      [name]: value,
+    });
+  };
+  const navigate = useNavigate();
   const formSubmit = async (event) => {
     event.preventDefault();
+    
+    if (formState.title === "" || formState.description === "") {
+      return alert("Must provide title and description!");
+    }
+    
     const formData = new FormData();
     formData.append("file", imageData);
     formData.append("upload_preset", process.env.REACT_APP_UPLOAD_PRESET);
@@ -52,21 +65,25 @@ const UploadForm = () => {
       console.log(res.data.secure_url);
       const imageUrl = res.data.secure_url;
       try {
-         addImageCard({
-          variables: {
-            imageUrl: imageUrl,
-            title,
-            description,
-            imageAuthor: Auth.getProfile().data.username,
+          const { data } = addImageCard({
+            variables: {
+              imageUrl: imageUrl,
+              title: formState.title,
+              description: formState.description,
+              imageAuthor: Auth.getProfile().data.username,
           },
         });
-        setTitle("");
-        setDescription("");
+        
       } catch (error) {
         console.error(error);
       }
+      setImage("");
+      setFormState({ title: "", description: "" });
+      navigate("/");
+      window.location.reload();
     });
   };
+  
 
   return (
     <div>
@@ -95,8 +112,10 @@ const UploadForm = () => {
                     <span className="text-gray-800">Title:</span>
                     <input
                       type="text"
+                      name="title"
+                      value={formState.title}
                       className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-lime-400 focus:ring-lime-300 focus:ring focus:ring-opacity-50"
-                      onChange={(event) => setTitle(event.target.value)}
+                      onChange={handleChange}
                     ></input>
                   </label>
                   <label className="block">
@@ -104,8 +123,10 @@ const UploadForm = () => {
                     <textarea
                       className="form-textarea mt-1 block w-full h-24 rounded-md border-gray-300 shadow-sm focus:border-lime-400 focus:ring-lime-300 focus:ring focus:ring-opacity-50"
                       rows="3"
+                      name="description"
+                      value={formState.description}
                       placeholder="Enter your description"
-                      onChange={(event) => setDescription(event.target.value)}
+                      onChange={handleChange}
                     ></textarea>
                   </label>
                   <button

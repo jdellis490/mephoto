@@ -14,6 +14,7 @@ import Login from "./pages/Login";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import UploadForm from "./components/UploadForm";
+import SingleImageCard from "./pages/SingleImageCard";
 
 //Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({ uri: "/graphql" });
@@ -40,11 +41,11 @@ const client = new ApolloClient({
       Query: {
         fields: {
           imageCards: {
-            keyArgs: false,
-            merge(existing = [], incoming, { args }) {
-              return [...existing, ...incoming];
+              keyArgs: false,
+              merge(existing = [], incoming, { args }) {
+                return [...existing, ...incoming];
+              }
             }
-          }
         }
       }
     }  
@@ -61,6 +62,7 @@ function App() {
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
           <Route path="/upload" element={<UploadForm />} />
+          <Route path="/imageCards/:imageId" element={<SingleImageCard />} />
         </Routes>
         <Footer />
       </BrowserRouter>

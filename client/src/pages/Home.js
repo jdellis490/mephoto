@@ -1,10 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import ImageCard from "../components/ImageCard";
+import ImageGallery from "../components/ImageGallery";
 import Auth from "../utils/auth";
 import { SlCamera } from 'react-icons/sl';
+import { QUERY_IMAGECARDS } from "../utils/queries";
+import { useQuery } from "@apollo/client";
 
 const Home = () => {
+  const { loading, data } = useQuery(QUERY_IMAGECARDS);
+  const imageCards = data?.imageCards || [];
   return (
     <div>
       {" "}
@@ -28,7 +32,15 @@ const Home = () => {
       </div>
     
       {/* Hope this works! */}
-      <ImageCard />
+      <div>
+        {loading ? (
+          <div> Loading images...</div>
+        ) : (
+          <ImageGallery
+            imageCards={imageCards}
+            />
+          )}
+      </div>
       
       {/* Finished Image card example */}
       <div className="max-w-sm bg-gray-200 rounded shadow-lg p-8 m-10">

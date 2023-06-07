@@ -24,17 +24,11 @@ const SingleImageCard = ( ) => {
       <div className="font-bold text-green-700 text-xl mb-3">
         {imageCard.title} by {imageCard.imageAuthor}
       </div>
-      {imageCard.image}
-      <img
-        src="https://source.unsplash.com/random"
-        alt=""
-        className="w-full mb-3"
-      />
+      <img className="w-full mb-3 rounded-lg" src={imageCard.imageUrl} alt="" />
       <div className="text-neutral-800 mb-3 pb-3 text-md md:mt-0">
         <p className="text-xs pb-3"> Date Added: {imageCard.createdAt} </p>
         <p className="text-green-700">
           {imageCard.description}
-          This is the description info of the image the user uploads.
         </p>
       </div>
       {/* TODO: Add Comments in list form and a button to add comments on image */}
