@@ -3,12 +3,14 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 import { QUERY_SINGLE_IMAGECARD } from "../utils/queries";
+import CommentForm from "../components/CommentForm";
+import CommentList from "../components/CommentList";
 
 const SingleImageCard = ( ) => {
   // Use `useParams()` to get value of route parameter `:imageId`
   const { imageId } = useParams();
   const { loading, data } = useQuery(QUERY_SINGLE_IMAGECARD, {
-    //pass URL parameter
+    //pass URL id parameter
     variables: { imageId: imageId },
   });
 
@@ -34,9 +36,8 @@ const SingleImageCard = ( ) => {
       {/* TODO: Add Comments in list form and a button to add comments on image */}
       <div className="font-bold text-neutral-800 text-md mb-3">
         Comments:
-        <div className="inline-block text-sm px-4 py-2 mx-5 border rounded border-lime-500 hover:bg-lime-500 hover:text-white">
-          Add Comment
-        </div>
+        <CommentList comments={imageCard.comments} />
+        <CommentForm imageId={imageCard._id} />
       </div>
     </div>
   );

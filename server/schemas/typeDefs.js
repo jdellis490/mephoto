@@ -42,7 +42,7 @@ type Mutation {
     addUser(username: String!, email: String!, password: String!): Auth
     login(email: String!, password: String!): Auth
     addImageCard(imageUrl: String!, title: String!, description: String!, imageAuthor: String!): ImageCard
-    addComment(_id: ID!, commentText: String!, commentAuthor: String!): ImageCard
+    addComment(imageId: ID!, commentText: String!, commentAuthor: String!): ImageCard
     deleteImageCard(_id: ID!): ImageCard
     deleteComment(_id: ID!, commentId: ID!): ImageCard
 }
