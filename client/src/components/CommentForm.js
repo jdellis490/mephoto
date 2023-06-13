@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { ADD_COMMENT } from "../utils/mutations";
 import { useMutation } from "@apollo/client";
 import Auth from "../utils/auth";
+import { Link } from "react-router-dom";
 
 const CommentForm = ({ imageId }) => {
   const [commentText, setCommentText] = useState("");
@@ -36,6 +37,7 @@ const CommentForm = ({ imageId }) => {
     <div className="antialiased text-gray-900">
       <div className="max-w-xl mx-auto py-1 md:max-w-4x1">
           {/* <h2 className="text-2xl font-bold">Comment:</h2> */}
+          {Auth.loggedIn() ? (
           <form
             className="mt-8 px-5 py-5 pb-10 max-w-md border border-neutral-800 rounded-xl"
             onSubmit={handleFormSubmit}
@@ -59,6 +61,27 @@ const CommentForm = ({ imageId }) => {
                   </div>
                 )}
           </form>
+          ) : (
+            <div className="container mt-5 p-5 bg-gray-200 rounded-xl shadow border text-xl">
+            <p>
+              Please{" "}
+              <Link
+                className="text-lime-600 underline font-bold"
+                to="/login"
+              >
+                Login
+              </Link>{" "}
+              or{" "}
+              <Link
+                className="text-lime-600 underline font-bold"
+                to="/signup"
+              >
+                Signup
+              </Link>{" "}
+              to add your comments!
+            </p>
+          </div>
+          )}
       </div>
     </div>
   );

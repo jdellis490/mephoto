@@ -6,7 +6,7 @@ import { QUERY_SINGLE_IMAGECARD } from "../utils/queries";
 import CommentForm from "../components/CommentForm";
 import CommentList from "../components/CommentList";
 
-const SingleImageCard = ( ) => {
+const SingleImageCard = () => {
   // Use `useParams()` to get value of route parameter `:imageId`
   const { imageId } = useParams();
   const { loading, data } = useQuery(QUERY_SINGLE_IMAGECARD, {

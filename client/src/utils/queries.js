@@ -42,6 +42,7 @@ export const QUERY_SINGLE_IMAGECARD = gql`
             comments {
                 _id
                 commentText
+                commentAuthor
                 createdAt
             }
         }

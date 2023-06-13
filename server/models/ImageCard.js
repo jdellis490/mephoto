@@ -5,6 +5,7 @@ const dateFormat = require('../utils/dateFormat');
 const imageCardSchema = new Schema({
     imageUrl: {
         type: String,
+        required: true,
     },
     title: {
         type: String,
@@ -18,6 +19,7 @@ const imageCardSchema = new Schema({
     },
     imageAuthor: {
         type: String,
+        required: true,
         trim: true,
     },
     createdAt: {

@@ -36,6 +36,7 @@ export const ADD_IMAGECARD = gql`
             comments {
                 _id
                 commentText
+                commentAuthor
             }
         }
     }
@@ -53,6 +54,7 @@ export const ADD_COMMENT = gql`
             comments {
                 _id
                 commentText
+                commentAuthor
                 createdAt
             }
         }
