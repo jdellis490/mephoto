@@ -7,19 +7,19 @@ const CommentList = ({ comments = [] }) => {
 
   return (
     <div>
-      
       <div className="flex flex-col">
         {comments &&
           comments.map((comment) => (
             <div key={comment._id} className="col-12 mb-3 pb-3">
-              <div className="p-3 bg-gray-200 text-green-700">
-                <h5>
-                  {comment.commentAuthor} said{" "}
-                  <span> on {comment.createdAt}</span>
-                </h5>
-                <p className="text-green-700 text-base text-center py-6">
-                  {comment.commentText}
-                </p>
+              <h5 className="text-green-700 text-lg">
+                {comment.commentAuthor}
+                <span className="text-black text-xs">
+                  {" "}
+                  said on {comment.createdAt}:
+                </span>
+              </h5>
+              <div className="p-3 bg-lime-400 rounded-lg border border-green-700 text-xl">
+                <p className="text-base p-2">{comment.commentText}</p>
               </div>
             </div>
           ))}

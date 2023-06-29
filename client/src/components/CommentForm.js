@@ -29,17 +29,16 @@ const CommentForm = ({ imageId }) => {
   const handleChange = (event) => {
     const { name, value } = event.target;
     if (name === "commentText") {
-    setCommentText(value);
-    }   
+      setCommentText(value);
+    }
   };
 
   return (
     <div className="antialiased text-gray-900">
       <div className="max-w-xl mx-auto py-1 md:max-w-4x1">
-          {/* <h2 className="text-2xl font-bold">Comment:</h2> */}
-          {Auth.loggedIn() ? (
+        {Auth.loggedIn() ? (
           <form
-            className="mt-8 px-5 py-5 pb-10 max-w-md border border-neutral-800 rounded-xl"
+            className="mt-8 px-5 py-5 pb-10 max-w-md border border-neutral-800 rounded-xl bg-neutral-400"
             onSubmit={handleFormSubmit}
           >
             <textarea
@@ -50,38 +49,32 @@ const CommentForm = ({ imageId }) => {
               onChange={handleChange}
             ></textarea>
             <button
-              className="inline block text-md font-bold px-5 py-3 border rounded border-lime-500 hover:bg-lime-500 hover:text-white"
+              className="inline block text-md font-bold px-3 py-2 border rounded border-lime-500 hover:bg-lime-500 hover:text-white"
               type="submit"
             >
               Add Comment
             </button>
             {error && (
-                  <div className="text-red-500 italic bg-red-100 rounded p-1">
-                    {error.message}
-                  </div>
-                )}
+              <div className="text-red-500 italic bg-red-100 rounded p-1">
+                {error.message}
+              </div>
+            )}
           </form>
-          ) : (
-            <div className="container mt-5 p-5 bg-gray-200 rounded-xl shadow border text-xl">
+        ) : (
+          <div className="container mt-5 p-5 bg-gray-200 rounded-xl shadow border text-xl">
             <p>
               Please{" "}
-              <Link
-                className="text-lime-600 underline font-bold"
-                to="/login"
-              >
+              <Link className="text-lime-600 underline font-bold" to="/login">
                 Login
               </Link>{" "}
               or{" "}
-              <Link
-                className="text-lime-600 underline font-bold"
-                to="/signup"
-              >
+              <Link className="text-lime-600 underline font-bold" to="/signup">
                 Signup
               </Link>{" "}
               to add your comments!
             </p>
           </div>
-          )}
+        )}
       </div>
     </div>
   );

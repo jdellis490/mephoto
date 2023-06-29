@@ -93,7 +93,7 @@ const UploadForm = () => {
             <h2 className="text-3xl font-bold">Upload an Image!</h2>
             {Auth.loggedIn() ? (
               <form
-                className="mt-8 px-5 py-5 pb-10 max-w-md border border-neutral-800 rounded-xl"
+                className="mt-8 px-5 py-5 pb-10 max-w-md bg-neutral-400 border border-neutral-800 rounded-xl"
                 onSubmit={formSubmit}
               >
                 <div className="grid grid-cols-1 gap-6">
@@ -114,14 +114,14 @@ const UploadForm = () => {
                       type="text"
                       name="title"
                       value={formState.title}
-                      className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-lime-400 focus:ring-lime-300 focus:ring focus:ring-opacity-50"
+                      className="mt-1 block w-full rounded-md border-neutral-800 shadow-sm focus:border-lime-400 focus:ring-lime-300 focus:ring focus:ring-opacity-50"
                       onChange={handleChange}
                     ></input>
                   </label>
                   <label className="block">
                     <span className="text-gray-800">Description:</span>
                     <textarea
-                      className="form-textarea mt-1 block w-full h-24 rounded-md border-gray-300 shadow-sm focus:border-lime-400 focus:ring-lime-300 focus:ring focus:ring-opacity-50"
+                      className="form-textarea mt-1 block w-full h-24 rounded-md border-neutral-800 shadow-sm focus:border-lime-400 focus:ring-lime-300 focus:ring focus:ring-opacity-50"
                       rows="3"
                       name="description"
                       value={formState.description}
@@ -130,10 +130,10 @@ const UploadForm = () => {
                     ></textarea>
                   </label>
                   <button
-                    className="inline block text-md font-bold px-5 py-3 border rounded border-lime-500 hover:bg-lime-500 hover:text-white"
+                    className="inline block text-md font-bold px-5 py-3 text-lg border-2 rounded border-neutral-800 hover:bg-lime-500 hover:text-white"
                     type="submit"
                   >
-                    Upload
+                    Upload!
                   </button>
                 </div>
                 {error && (

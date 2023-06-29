@@ -22,20 +22,21 @@ const SingleImageCard = () => {
 
   //ImageCard model props into JSX for rendering single image
   return (
-    <div className="max-w-sm bg-gray-300 rounded shadow-lg p-8 m-10">
-      <div className="font-bold text-green-700 text-xl mb-3">
-        {imageCard.title} by {imageCard.imageAuthor}
+    <div className="max-w-sm bg-neutral-200 rounded shadow-lg p-8 m-10">
+      <div className="font-bold text-3xl mb-3">
+        {imageCard.title} by:{" "}
+        <span className="text-green-700">{imageCard.imageAuthor} </span>
       </div>
       <img className="w-full mb-3 rounded-lg" src={imageCard.imageUrl} alt="" />
       <div className="text-neutral-800 mb-3 pb-3 text-md md:mt-0">
         <p className="text-xs pb-3"> Date Added: {imageCard.createdAt} </p>
-        <p className="text-green-700">
+        <p className="px-4 py-10 mb-10 text-lg font-bold border border-black bg-neutral-100 rounded-lg">
           {imageCard.description}
         </p>
       </div>
       {/* TODO: Add Comments in list form and a button to add comments on image */}
-      <div className="font-bold text-neutral-800 text-md mb-3">
-        Comments:
+      <div className="px-3 py-3 font-bold text-neutral-800 text-md border border-black border-double rounded-xl">
+        <div className="mb-3 text-gray-700 text-xl">Comments:</div>
         <CommentList comments={imageCard.comments} />
         <CommentForm imageId={imageCard._id} />
       </div>
