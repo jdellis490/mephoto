@@ -11,10 +11,10 @@ const CommentList = ({ comments = [] }) => {
         {comments &&
           comments.map((comment) => (
             <div key={comment._id} className="col-12 mb-3 pb-3">
-              <h5 className="text-green-700 text-lg">
+              <h5 className="text-lime-600 text-xl">
                 {comment.commentAuthor}
                 <span className="text-black text-xs">
-                  {" "}
+                {" "}
                   said on {comment.createdAt}:
                 </span>
               </h5>

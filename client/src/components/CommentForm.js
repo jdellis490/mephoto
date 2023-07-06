@@ -35,10 +35,10 @@ const CommentForm = ({ imageId }) => {
 
   return (
     <div className="antialiased text-gray-900">
-      <div className="max-w-xl mx-auto py-1 md:max-w-4x1">
+      <div className="max-w-xl mx-auto py-1">
         {Auth.loggedIn() ? (
           <form
-            className="mt-8 px-5 py-5 pb-10 max-w-md border border-neutral-800 rounded-xl bg-neutral-400"
+            className="mt-8 px-5 py-5 pb-10 max-w-xl border border-neutral-800 rounded-xl bg-neutral-400"
             onSubmit={handleFormSubmit}
           >
             <textarea
@@ -49,7 +49,7 @@ const CommentForm = ({ imageId }) => {
               onChange={handleChange}
             ></textarea>
             <button
-              className="inline block text-md font-bold px-3 py-2 border rounded border-lime-500 hover:bg-lime-500 hover:text-white"
+              className="inline block text-md font-bold px-3 py-2 border rounded border-neutral-900 bg-neutral-200 hover:bg-lime-500 hover:border-white hover:text-white"
               type="submit"
             >
               Add Comment

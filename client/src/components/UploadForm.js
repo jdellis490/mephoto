@@ -93,7 +93,7 @@ const UploadForm = () => {
             <h2 className="text-3xl font-bold">Upload an Image!</h2>
             {Auth.loggedIn() ? (
               <form
-                className="mt-8 px-5 py-5 pb-10 max-w-md bg-neutral-400 border border-neutral-800 rounded-xl"
+                className="mt-8 px-5 py-5 pb-10 max-w-md bg-neutral-300 border border-neutral-800 rounded-xl"
                 onSubmit={formSubmit}
               >
                 <div className="grid grid-cols-1 gap-6">
@@ -130,7 +130,7 @@ const UploadForm = () => {
                     ></textarea>
                   </label>
                   <button
-                    className="inline block text-md font-bold px-5 py-3 text-lg border-2 rounded border-neutral-800 hover:bg-lime-500 hover:text-white"
+                    className="inline block text-md font-bold px-5 py-3 text-lg border rounded border-neutral-800 bg-gradient-to-r from-lime-300 to-lime-500 text-neutral-800 hover:from-neutral-400 hover:to-neutral-700 hover:text-white"
                     type="submit"
                   >
                     Upload!
