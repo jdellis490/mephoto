@@ -1,7 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useQuery } from "@apollo/client";
-import { QUERY_IMAGECARDS } from "../utils/queries";
 
 
 const ImageGallery = ({ imageCards }) => {
@@ -21,7 +19,9 @@ const ImageGallery = ({ imageCards }) => {
               {imageCard.title} <br />
               <span className="text-xl text-neutral-700"> by: {imageCard.imageAuthor}</span>
             </div>
+            <Link to={`/imageCards/${imageCard._id}`}>
             <img className="w-auto h-auto mb-3 rounded-lg border border-black bg-neutral-100" src={imageCard.imageUrl} alt="" />
+            </Link>
             <p className="text-neutral-800 pb-5 text-xs text-left">
                 Date Added: {imageCard.createdAt}{" "}
               </p>
@@ -30,13 +30,11 @@ const ImageGallery = ({ imageCards }) => {
                 {imageCard.description}
               </p>              
             </div>
-
-            {/* TODO: Find a way to link the comments to an image card */}
             <div className="font-bold text-neutral-800 text-lg mb-3">
-              Comments:
+              {/* Comments: */}
               <Link to={`/imageCards/${imageCard._id}`}>
               <button className="inline-block text-sm px-4 py-2 mx-5 border rounded border-lime-500 hover:bg-lime-500 hover:text-white">
-                Comment on this!
+                Click to add a comment!
               </button>
               </Link>
             </div>

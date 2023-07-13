@@ -60,3 +60,27 @@ export const ADD_COMMENT = gql`
         }
     }
 `;
+
+export const DELETE_IMAGECARD = gql`
+    mutation deleteImageCard($imageId: ID!) {
+        deleteImageCard(imageId: $imageId) {
+            _id
+        }
+    }
+`;
+
+export const DELETE_COMMENT = gql`
+    mutation deleteComment($imageId: ID!, $commentId: ID!) {
+        deleteComment(imageId: $imageId, commentId: $commentId) {
+            _id
+            imageUrl
+            title
+            description
+            imageAuthor
+            createdAt
+            comments {
+                _id
+            }
+        }
+    }
+`;

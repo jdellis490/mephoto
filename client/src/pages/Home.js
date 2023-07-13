@@ -23,7 +23,7 @@ const Home = () => {
           </p>
         )}
         <p className="text-gray-500 text-lg">
-          Let's get started by uploading an image
+          Let's get started by uploading an image to display in the gallery then comment on any image
         </p>
         <br />
         <button className="inline-block mt-5 text-lg text-center px-4 py-2 border rounded border-neutral-800 bg-gradient-to-r from-lime-300 to-lime-500 text-neutral-800 hover:from-neutral-400 hover:to-neutral-700 hover:text-lime-400 md:mt-0">
@@ -34,7 +34,6 @@ const Home = () => {
           </Link>
         </button>
       </div>
-      {/* Hope this works! */}
       <div>
         {loading ? (
           <div> Loading images...</div>
@@ -43,7 +42,7 @@ const Home = () => {
         )}
       </div>
       {/* Finished Image card example */}
-      <div className="max-w-sm bg-gray-200 rounded shadow-lg p-8 m-10">
+      {/* <div className="max-w-sm bg-gray-200 rounded shadow-lg p-8 m-10">
         <div className="font-bold text-green-700 text-xl mb-3">
           Image title by Author
         </div>
@@ -64,7 +63,7 @@ const Home = () => {
             Add Comment
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };
