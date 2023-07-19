@@ -6,6 +6,7 @@ import { QUERY_SINGLE_IMAGECARD } from "../utils/queries";
 import { DELETE_IMAGECARD } from "../utils/mutations";
 import CommentForm from "../components/CommentForm";
 import CommentList from "../components/CommentList";
+import Auth from "../utils/auth";
 
 const SingleImageCard = () => {
   // Use `useParams()` to get value of route parameter `:imageId`
@@ -20,15 +21,17 @@ const SingleImageCard = () => {
     const [deleteImageCard, { error }] = useMutation(DELETE_IMAGECARD);
     const handleDelete = async (event) => {
       event.preventDefault();
+      if (Auth.getProfile().data.username === imageCard.imageAuthor) {
       try {
         deleteImageCard({
           variables: { imageId },
         });
-        navigate("/");
-        window.location.reload();
-      } catch (err) {
-        console.error(err);
+          navigate("/");
+          window.location.reload();
+        } catch (err) {
+          console.error(err);
       }
+    } else return alert('Not Authorized!')
     };
     return (
       <div className="flex justify-end">
@@ -39,7 +42,7 @@ const SingleImageCard = () => {
           Delete
         </button>
         {error && (
-          <div className="text-red-500 italic bg-red-100 rounded p-1">
+          <div className="inline block text-sm text-red-500 italic bg-red-100 rounded p-1">
             {error.message}
           </div>
         )}
