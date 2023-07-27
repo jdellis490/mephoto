@@ -42,8 +42,8 @@ const SingleImageCard = () => {
           Delete
         </button>
         {error && (
-          <div className="inline block text-sm text-red-500 italic bg-red-100 rounded p-1">
-            {error.message}
+          <div className="inline block text-sm text-red-500 italic bg-red-100 rounded p-1 mt-1">
+            {error ? 'Unable to delete' : error.message}
           </div>
         )}
       </div>
@@ -62,7 +62,8 @@ const SingleImageCard = () => {
       <div className="font-bold text-3xl mb-3">
         {imageCard.title} by:{" "}
         <span className="text-lime-600">{imageCard.imageAuthor} </span>
-        <DeleteImageButton imageId={imageCard._id} />
+        {Auth.getProfile().data.username === imageCard.imageAuthor ? ( <DeleteImageButton imageId={imageCard._id} /> ) 
+        : ('')}
       </div>
       <img
         className="w-full mb-3 rounded-lg border border-black bg-neutral-100"

@@ -34,7 +34,7 @@ const ImageGallery = ({ imageCards }) => {
               {/* Comments: */}
               <Link to={`/imageCards/${imageCard._id}`}>
               <button className="inline-block text-sm px-4 py-2 mx-5 border rounded border-lime-500 hover:bg-lime-500 hover:text-white">
-                Click to add a comment!
+                Comments
               </button>
               </Link>
             </div>

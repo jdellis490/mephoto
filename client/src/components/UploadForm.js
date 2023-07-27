@@ -137,8 +137,8 @@ const UploadForm = () => {
                   </button>
                 </div>
                 {error && (
-                  <div className="text-red-500 italic bg-red-100 rounded p-1">
-                    {error.message}
+                  <div className="text-red-500 italic bg-red-100 rounded p-1 mt-1">
+                    {error? 'Unable to upload' : error.message}
                   </div>
                 )}
               </form>

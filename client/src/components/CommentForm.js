@@ -55,8 +55,8 @@ const CommentForm = ({ imageId }) => {
               Add Comment
             </button>
             {error && (
-              <div className="text-red-500 italic bg-red-100 rounded p-1">
-                {error.message}
+              <div className="text-red-500 italic bg-red-100 rounded p-2 mt-1">
+                {error ? 'Please enter a comment' : error.message}
               </div>
             )}
           </form>
