@@ -53,7 +53,7 @@ const SingleImageCard = () => {
   const imageCard = data?.imageCard || {};
 
   if (loading) {
-    return <div>Getting images...</div>;
+    return <div>Getting image...</div>;
   }
 
   //ImageCard model props into JSX for rendering single image
@@ -76,7 +76,6 @@ const SingleImageCard = () => {
           {imageCard.description}
         </p>
       </div>
-      {/* TODO: Add Comments in list form and a button to add comments on image */}
       <div className="px-3 py-3 font-bold text-neutral-800 text-md border border-black border-dashed bg-neutral-300 rounded-xl">
         <div className="mb-3 text-gray-700 text-xl">Comments:</div>
         <CommentList comments={imageCard.comments} />
