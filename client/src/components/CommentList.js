@@ -20,7 +20,7 @@ const CommentList = ({ comments = [] }) => {
       const handleDeleteComment = async (event) => {
         event.preventDefault();
         const userComment = comments.find((comment) => comment.commentAuthor === Auth.getProfile().data.username && commentId === comment._id)
-        if (Auth.getProfile().data.username === userComment.commentAuthor) {
+        if (Auth.loggedIn() && Auth.getProfile().data.username === userComment.commentAuthor) {
         try {
           deleteComment({
             variables: { imageId, commentId },
@@ -63,7 +63,7 @@ const CommentList = ({ comments = [] }) => {
               </h5>
               <div className="p-3 bg-lime-400 rounded-lg border border-green-700 text-xl">
                 <p className="text-base p-2">{comment.commentText}</p>
-                {Auth.getProfile().data.username === comment.commentAuthor ? ( <DeleteCommentButton commentId={comment._id} /> ) 
+                {Auth.loggedIn() && Auth.getProfile().data.username === comment.commentAuthor ? ( <DeleteCommentButton commentId={comment._id} /> ) 
         : ('')}
               </div>
               

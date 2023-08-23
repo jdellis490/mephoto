@@ -15,23 +15,30 @@ const SingleImageCard = () => {
     //pass URL id parameter
     variables: { imageId: imageId },
   });
-  const navigate = useNavigate();
+
+  const imageCard = data?.imageCard || {};
+
+  if (loading) {
+    return <div>Getting image...</div>;
+  }
+
   // Delete images
   const DeleteImageButton = ({ imageId }) => {
+    const navigate = useNavigate();
     const [deleteImageCard, { error }] = useMutation(DELETE_IMAGECARD);
     const handleDelete = async (event) => {
       event.preventDefault();
-      if (Auth.getProfile().data.username === imageCard.imageAuthor) {
-      try {
-        deleteImageCard({
-          variables: { imageId },
-        });
+      if ( Auth.loggedIn() && Auth.getProfile().data.username === imageCard.imageAuthor) {
+        try {
+          deleteImageCard({
+            variables: { imageId },
+          });
           navigate("/");
           window.location.reload();
         } catch (err) {
           console.error(err);
-      }
-    } else return alert('Not Authorized!')
+        }
+      } else return alert("Not Authorized!");
     };
     return (
       <div className="flex justify-end">
@@ -43,18 +50,12 @@ const SingleImageCard = () => {
         </button>
         {error && (
           <div className="inline block text-sm text-red-500 italic bg-red-100 rounded p-1 mt-1">
-            {error ? 'Unable to delete' : error.message}
+            {error ? "Unable to delete" : error.message}
           </div>
         )}
       </div>
     );
   };
-
-  const imageCard = data?.imageCard || {};
-
-  if (loading) {
-    return <div>Getting image...</div>;
-  }
 
   //ImageCard model props into JSX for rendering single image
   return (
@@ -62,8 +63,11 @@ const SingleImageCard = () => {
       <div className="font-bold text-3xl mb-3">
         {imageCard.title} by:{" "}
         <span className="text-lime-600">{imageCard.imageAuthor} </span>
-        {Auth.getProfile().data.username === imageCard.imageAuthor ? ( <DeleteImageButton imageId={imageCard._id} /> ) 
-        : ('')}
+        { Auth.loggedIn() && Auth.getProfile().data.username === imageCard.imageAuthor ? (
+          <DeleteImageButton imageId={imageCard._id} />
+        ) : (
+          ""
+        )}
       </div>
       <img
         className="w-full mb-3 rounded-lg border border-black bg-neutral-100"
