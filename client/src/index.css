@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&family=Philosopher&family=Righteous&family=The+Nautigal:wght@700&display=swap');
+
+div, span, button, h1, p {
+    font-family: 'Open Sans';
+}
