@@ -6,17 +6,12 @@ import { Link, useNavigate } from "react-router-dom";
 import Auth from "../utils/auth";
 import Axios from "axios";
 
-// cloudinary.config({
-//   cloud_name: process.env.REACT_APP_CLOUD_NAME,
-//   api_key: process.env.REACT_APP_CLOUD_API_KEY,
-//   api_secret: process.env.REACT_APP_CLOUD_API_SECRET
-// });
-
 const UploadForm = () => {
   const [image, setImage] = useState("");
   const [imageData, setImageData] = useState("");
   const [formState, setFormState] = useState({
-    title: "", description: ""
+    title: "",
+    description: "",
   });
 
   const [addImageCard, { error }] = useMutation(ADD_IMAGECARD, {
@@ -49,31 +44,33 @@ const UploadForm = () => {
   const navigate = useNavigate();
   const formSubmit = async (event) => {
     event.preventDefault();
-    
+
     if (formState.title === "" || formState.description === "") {
       return alert("Must provide title and description!");
     }
-    
+
+    //Upload preset used from Cloudinary API
     const formData = new FormData();
     formData.append("file", imageData);
     formData.append("upload_preset", process.env.REACT_APP_UPLOAD_PRESET);
-
+    // Axios for json parsing to object, easier use with asnyc/awat syntax, and built in error handling over fetch
     await Axios.post(
       `https://api.cloudinary.com/v1_1/${process.env.REACT_APP_CLOUD_NAME}/image/upload`,
       formData
     ).then((res) => {
       console.log(res.data.secure_url);
+      // Gets image url from stored Cloudinary image and adds to mutation
       const imageUrl = res.data.secure_url;
       try {
-          const { data } = addImageCard({
-            variables: {
-              imageUrl: imageUrl,
-              title: formState.title,
-              description: formState.description,
-              imageAuthor: Auth.getProfile().data.username,
+        const { data } = addImageCard({
+          variables: {
+            imageUrl: imageUrl,
+            title: formState.title,
+            description: formState.description,
+            // Add Image mutation won't work unless author has auth
+            imageAuthor: Auth.getProfile().data.username,
           },
         });
-        
       } catch (error) {
         console.error(error);
       }
@@ -83,7 +80,6 @@ const UploadForm = () => {
       window.location.reload();
     });
   };
-  
 
   return (
     <div>
@@ -138,7 +134,7 @@ const UploadForm = () => {
                 </div>
                 {error && (
                   <div className="text-red-500 italic bg-red-100 rounded p-1 mt-1">
-                    {error? 'Unable to upload' : error.message}
+                    {error ? "Unable to upload" : error.message}
                   </div>
                 )}
               </form>

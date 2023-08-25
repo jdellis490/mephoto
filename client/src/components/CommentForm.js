@@ -4,6 +4,7 @@ import { useMutation } from "@apollo/client";
 import Auth from "../utils/auth";
 import { Link } from "react-router-dom";
 
+// Destructure imageID and pass props to use in CommentForm function
 const CommentForm = ({ imageId }) => {
   const [commentText, setCommentText] = useState("");
   const [addComment, { error }] = useMutation(ADD_COMMENT);
@@ -17,6 +18,7 @@ const CommentForm = ({ imageId }) => {
         variables: {
           imageId,
           commentText,
+          // User can't comment unless they have auth
           commentAuthor: Auth.getProfile().data.username,
         },
       });
@@ -56,7 +58,7 @@ const CommentForm = ({ imageId }) => {
             </button>
             {error && (
               <div className="text-red-500 italic bg-red-100 rounded p-2 mt-1">
-                {error ? 'Please enter a comment' : error.message}
+                {error ? "Please enter a comment" : error.message}
               </div>
             )}
           </form>

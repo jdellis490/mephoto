@@ -23,7 +23,8 @@ const Home = () => {
           </p>
         )}
         <p className="text-gray-500 text-lg">
-          Let's get started by uploading an image to display in the gallery then comment on any image.
+          Let's get started by uploading an image to display in the gallery then
+          comment on any image.
         </p>
         <br />
         <button className="inline-block mt-5 text-lg text-center px-4 py-2 border rounded border-neutral-800 bg-gradient-to-r from-lime-300 to-lime-500 text-neutral-800 hover:from-neutral-400 hover:to-neutral-700 hover:text-lime-400 md:mt-0">

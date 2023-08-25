@@ -19,7 +19,7 @@ const Signup = () => {
       [name]: value,
     });
   };
-
+  // Adds user based on form state and issues auth with token
   const formSubmit = async (event) => {
     event.preventDefault();
     try {

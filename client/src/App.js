@@ -35,26 +35,27 @@ const authLink = setContext((_, { headers }) => {
 // Set up client to execute the `authLink` middleware prior to making the request to GraphQL API
 const client = new ApolloClient({
   link: authLink.concat(httpLink),
-// Custom merge function to combat cache merge error
+  // Custom merge function to combat cache merge error
   cache: new InMemoryCache({
     typePolicies: {
       Query: {
         fields: {
           imageCards: {
-              keyArgs: false,
-              merge(existing = [], incoming, { args }) {
-                return [...existing, ...incoming];
-              }
-            }
-        }
-      }
-    }  
+            keyArgs: false,
+            merge(existing = [], incoming, { args }) {
+              return [...existing, ...incoming];
+            },
+          },
+        },
+      },
+    },
   }),
 });
 
 function App() {
   return (
     <ApolloProvider client={client}>
+      {/* BrowserRouter used for react DOM rendering */}
       <BrowserRouter>
         <Header />
         <Routes>
@@ -62,6 +63,7 @@ function App() {
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
           <Route path="/upload" element={<UploadForm />} />
+          {/* Url path from image id using useParams()  */}
           <Route path="/imageCards/:imageId" element={<SingleImageCard />} />
         </Routes>
         <Footer />

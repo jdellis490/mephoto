@@ -28,7 +28,11 @@ const SingleImageCard = () => {
     const [deleteImageCard, { error }] = useMutation(DELETE_IMAGECARD);
     const handleDelete = async (event) => {
       event.preventDefault();
-      if ( Auth.loggedIn() && Auth.getProfile().data.username === imageCard.imageAuthor) {
+      // User must have auth with login and be the image author to delete
+      if (
+        Auth.loggedIn() &&
+        Auth.getProfile().data.username === imageCard.imageAuthor
+      ) {
         try {
           deleteImageCard({
             variables: { imageId },
@@ -63,7 +67,8 @@ const SingleImageCard = () => {
       <div className="font-bold text-3xl mb-3">
         {imageCard.title} by:{" "}
         <span className="text-lime-600">{imageCard.imageAuthor} </span>
-        { Auth.loggedIn() && Auth.getProfile().data.username === imageCard.imageAuthor ? (
+        {Auth.loggedIn() &&
+        Auth.getProfile().data.username === imageCard.imageAuthor ? (
           <DeleteImageButton imageId={imageCard._id} />
         ) : (
           ""
@@ -82,6 +87,7 @@ const SingleImageCard = () => {
       </div>
       <div className="px-3 py-3 font-bold text-neutral-800 text-md border border-black border-dashed bg-neutral-300 rounded-xl">
         <div className="mb-3 text-gray-700 text-xl">Comments:</div>
+        {/* Creates JSX elements with props of destructured components */}
         <CommentList comments={imageCard.comments} />
         <CommentForm imageId={imageCard._id} />
       </div>
