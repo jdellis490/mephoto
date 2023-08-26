@@ -9,8 +9,8 @@ It is deployed here:
 
 ## Usage
 
-To use, simply sign up and upload an image. After an upload you can view other image, comment on them, and even delete your own images and comments.
+To use, simply sign up and upload an image. After an upload, you can view other images, comment on them, and even delete your own images and comments.
 
 ## Contribution
 
-If you would like to contribute simply shoot me an email. 
+If you would like to contribute simply shoot me an [email](jdellis490@gmail.com)
