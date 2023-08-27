@@ -20,7 +20,7 @@
   "bugs": {
     "url": "https://github.com/jdellis490/neupixl/issues"
   },
-  "homepage": "https://github.com/jdellis490/neupixl#readme",
+  "homepage": "https://neupixl-b3196fa7bb12.herokuapp.com/",
   "dependencies": {
     "@tailwindcss/forms": "^0.5.5",
     "autoprefixer": "^10.4.15",
