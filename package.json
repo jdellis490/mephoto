@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "server/server.js",
+  "homepage": "https://neupixl-b3196fa7bb12.herokuapp.com/",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "develop": "concurrently \"cd server && npm run watch\" \"cd client && npm start\"",
@@ -20,7 +21,6 @@
   "bugs": {
     "url": "https://github.com/jdellis490/neupixl/issues"
   },
-  "homepage": "https://neupixl-b3196fa7bb12.herokuapp.com/",
   "dependencies": {
     "@tailwindcss/forms": "^0.5.5",
     "autoprefixer": "^10.4.15",
