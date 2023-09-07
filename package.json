@@ -5,13 +5,13 @@
   "main": "server/server.js",
   "homepage": "https://neupixl-b3196fa7bb12.herokuapp.com/",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "develop": "concurrently \"cd server && npm run watch\" \"cd client && npm start\"",
-    "install": "cd server && npm i && cd ../client && npm i",
-    "seed": "cd server && npm run seed",
-    "build": "cd client && npm run build",
-    "start": "node server.js"
-  },
+    "dev": "react-scripts start",
+    "start": "serve -s build",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
+    "heroku-postbuild": "npm run build"
+},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/jdellis490/neupixl.git"
@@ -26,6 +26,7 @@
     "autoprefixer": "^10.4.15",
     "concurrently": "^7.6.0",
     "dotenv": "^16.3.1",
-    "postcss": "^8.4.28"
+    "postcss": "^8.4.28",
+    "serve": "^14.2.1"
   }
 }
